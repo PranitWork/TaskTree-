@@ -1,0 +1,69 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "John Doe"
+    }
+  ],
+  "folders": [
+    {
+      "id": "uu3DV5GNf2h3VeCI7ctNv",
+      "FolderName": "youtube reels"
+    },
+    {
+      "id": "phr3u-Td5BG0XOcgPGTWg",
+      "FolderName": "instagram reels"
+    }
+  ],
+  "task": [
+    {
+      "id": "Hy-tUsbFnZSvnv3517dbb",
+      "TaskTitle": "reel 1 script",
+      "folderId": "uu3DV5GNf2h3VeCI7ctNv"
+    },
+    {
+      "id": "ws0_Y5p7zhElG9ow6Q-Im",
+      "TaskTitle": "pranit ",
+      "folderId": "uu3DV5GNf2h3VeCI7ctNv"
+    },
+    {
+      "id": "srU95ZVJNL6ITl0ATf2XH",
+      "TaskTitle": "reel 2",
+      "folderId": "phr3u-Td5BG0XOcgPGTWg"
+    }
+  ],
+  "todos": [
+    {
+      "id": "El4GN1lmj0h3cfRaAAZR5",
+      "title": "youtube video shoot 1",
+      "description": "detail i will tell you latter",
+      "folderId": "uu3DV5GNf2h3VeCI7ctNv",
+      "taskId": "Hy-tUsbFnZSvnv3517dbb",
+      "createdAt": 1750677178316
+    },
+    {
+      "id": "Pn_U4lOLGln-fAWOI6Yt_",
+      "title": "ggdfg",
+      "description": "dffgdffgdfg",
+      "folderId": "phr3u-Td5BG0XOcgPGTWg",
+      "taskId": "srU95ZVJNL6ITl0ATf2XH",
+      "createdAt": 1750677200475
+    },
+    {
+      "id": "0YNb9HRifwauqfRvW0VuS",
+      "title": "pranit bhai op",
+      "description": "hello",
+      "folderId": "uu3DV5GNf2h3VeCI7ctNv",
+      "taskId": "Hy-tUsbFnZSvnv3517dbb",
+      "createdAt": 1750684734715
+    },
+    {
+      "id": "70NugodiMMN9RaCRBYXiy",
+      "title": "hello pranit",
+      "description": "hello hello",
+      "folderId": "uu3DV5GNf2h3VeCI7ctNv",
+      "taskId": "ws0_Y5p7zhElG9ow6Q-Im",
+      "createdAt": 1750684777082
+    }
+  ]
+}
