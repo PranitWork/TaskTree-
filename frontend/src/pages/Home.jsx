@@ -22,6 +22,7 @@ const Home = () => {
     defaultValues: { title: "", description: "" },
   });
 
+
   const selectedFolderId = watch("folderId"); // 👈 watch the folder selection
   const dispatch = useDispatch();
 
@@ -49,7 +50,7 @@ const Home = () => {
       {/* floating “Create Todo” button */}
       <button
         onClick={openModal}
-        className="absolute bottom-5 right-5 bg-green-600 p-3 rounded-full text-white text-sm"
+        className="absolute cursor-pointer bottom-5 right-5 bg-green-600 p-3 rounded-full text-white text-sm"
       >
         + Create Todo
       </button>

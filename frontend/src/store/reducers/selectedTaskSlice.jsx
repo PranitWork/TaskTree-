@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState =({
 id: null ,
-name:""
+name:"Start Write Your Tasks..."
 })
 
 const selectedTaskSlice = createSlice({

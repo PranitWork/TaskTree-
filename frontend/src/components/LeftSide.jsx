@@ -58,7 +58,8 @@ const LeftSide = () => {
       <div className="flex flex-col w-[17%] min-h-screen bg-gradient-to-b from-[#f3f4f6] to-[#e5e7eb] shadow-xl rounded-se-3xl">
         {/* Folders Section */}
         <div className="flex-1 p-4 overflow-y-auto space-y-4">
-          <h2 className="text-lg font-semibold text-gray-700 mb-3">Folders</h2>
+          <h1 className="text-xl font-bold text-gray-700 mb-3">Task <span className="text-green-600">Tree</span></h1>
+          <h2 className="text-[2.5vh] font-semibold text-gray-500 mb-3">Folders</h2>
           <div className="bg-white rounded-xl p-3 shadow hover:shadow-md transition cursor-pointer">
             {folders.map((f) => (
               /* ↓ 1. pass the folder id to the handler */
@@ -84,7 +85,9 @@ const LeftSide = () => {
                       >
                         {t.TaskTitle}
                       </p>
+
                     ))}
+                   
                   </div>
                 )}
               </div>
@@ -96,13 +99,13 @@ const LeftSide = () => {
         <div className="p-4 bg-white shadow-inner rounded-ee-3xl space-y-3">
           <button
             onClick={openAddTask}
-            className="w-full py-2 px-3 bg-green-500 hover:bg-green-600 text-white rounded-xl font-semibold transition shadow"
+            className="w-full cursor-pointer py-2 px-3 bg-green-500 hover:bg-green-600 text-white rounded-xl font-semibold transition shadow"
           >
             + Add Task
           </button>
           <button
             onClick={openCreateFolder}
-            className="w-full py-2 px-3 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-semibold transition shadow"
+            className="w-full cursor-pointer py-2 px-3 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-semibold transition shadow"
           >
             + Create Folder
           </button>
