@@ -40,9 +40,9 @@ const Home = () => {
 
   return (
     <div className="relative w-full">
-      <div className="p-5 relative inline-block">
+      <div className="p-5 w-full relative inline-block">
         <h1 className="text-[4vh] mb-5 font-bold">{taskTitle}</h1>
-        <div className="flex gap-3">
+        <div className=" w-full flex gap-3">
           <TodoCard />
         </div>
       </div>
