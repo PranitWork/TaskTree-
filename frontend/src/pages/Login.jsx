@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncsigninuser } from "../store/actions/userActions";
-import {toast} from "react-toastify"
+
+
 
 const Login = () => {
   const {handleSubmit, register,reset}= useForm();
@@ -15,7 +16,7 @@ const Login = () => {
 
   const loginHandler =(data)=>{
     dispatch(asyncsigninuser(data));
-    toast.success("user LogIn")
+  
     reset()
     setTimeout(() => {
       navigate("/")

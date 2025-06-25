@@ -5,12 +5,9 @@ const TodoCard = () => {
   const todos = useSelector((state) => state.todoReducer.todos);
   const selectedTaskId = useSelector((state) => state.selectedTaskReducer.id);
 
-  // ✅  Use the ID directly
   const filteredTodos =
-    selectedTaskId !== null
-      ? todos.filter((todo) => todo.taskId === selectedTaskId.id)
+    selectedTaskId ? todos.filter((todo) => todo.taskId === selectedTaskId.id)
       : [];
-
   return (
     <>
       {filteredTodos.length ? (

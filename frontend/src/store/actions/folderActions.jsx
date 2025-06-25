@@ -1,6 +1,6 @@
 import axios from "../../api/config"
 import {loadfolder} from "../reducers/folderSlice"
-
+import {toast} from "react-toastify"
 
 export const asyncloadFolders = ()=> async (dispatch,getState)=>{
     try{
@@ -20,3 +20,13 @@ export const asynccreateFolder = (folders)=> async (dispatch, getState)=>{
         console.log(err)
     }
 }
+
+
+export const asyncdeleteFolder = (id) => async (dispatch, getState) => {
+  try {
+    await axios.delete(`/folders/${id}`);
+    toast.warning("Folder deleted");
+  } catch (err) {
+    console.error("Delete Folder Error:", err);
+  }
+};

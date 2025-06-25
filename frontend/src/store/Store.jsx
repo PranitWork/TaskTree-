@@ -4,7 +4,8 @@ import userSlice from "./reducers/userSlice"
 import folderSlice from "./reducers/folderSlice"
 import todoSlice from "./reducers/todoSlice"
 import taskSlice from "./reducers/taskSlice"
-import  selectedTaskSlice  from "./reducers/selectedTaskSlice"
+import selectedTaskSlice  from "./reducers/selectedTaskSlice"
+import selectedFolderSlice  from "./reducers/selectedFolderSlice"
 export const Store = configureStore( {
   reducer:{
     userReducer: userSlice,
@@ -12,5 +13,6 @@ export const Store = configureStore( {
     todoReducer: todoSlice,
     taskReducer: taskSlice,
     selectedTaskReducer: selectedTaskSlice,
+    selectedFolderReducer : selectedFolderSlice,
   },
 })

@@ -5,178 +5,38 @@
       "fullname": "pranit",
       "email": "pranit@gmail.com",
       "password": "123"
+    },
+    {
+      "id": "67K1ocelCE7Cs5WGE7zg3",
+      "fullname": "gauri",
+      "email": "gauri@gmail.com",
+      "password": "123"
     }
   ],
   "folders": [
     {
-      "id": "uu3DV5GNf2h3VeCI7ctNv",
-      "FolderName": "youtube reels"
-    },
-    {
-      "id": "phr3u-Td5BG0XOcgPGTWg",
-      "FolderName": "instagram reels"
-    },
-    {
-      "id": "u_Rmw5tF0mrddLMCUxPa8",
-      "FolderName": "pranit"
-    },
-    {
-      "id": "z_bzFiHd6DIcHaOt51peb",
-      "FolderName": "youtube reelssdffdsf"
-    },
-    {
-      "id": "owFo51WrZ9URcPzmLdIqG",
-      "FolderName": "dsdsd"
-    },
-    {
-      "id": "bgVl19h-YT-T8XmdefGLY",
-      "FolderName": "fsfsfffds"
-    },
-    {
-      "id": "JkvFlKNVdkbmFqO0Rtaz5",
-      "FolderName": "hdffdfhhfhfhdffgfg"
-    },
-    {
-      "id": "Lz63kYbkenYidwDGnRUvR",
-      "FolderName": "test folder",
-      "userId": "1d9HZRJQp3ykiXxQZltce"
-    },
-    {
-      "id": "iudaBBkKEQPJBaDbR7GtC",
-      "FolderName": "fsdfdsfsffsfdfsd"
-    },
-    {
-      "id": "IS8g7j5SBnirGPN3_pWlG",
-      "FolderName": "youtube reelsgvdffgsdfgsdsfsgs"
-    },
-    {
-      "id": "ITxkzzH0tuFBJG4zYxAPs",
-      "FolderName": "fdsff",
-      "userId": "1d9HZRJQp3ykiXxQZltce"
-    },
-    {
-      "id": "sqLntmAxcuzSwqr0EBth5",
+      "id": "ll6-d0t2rTvm7r4QPe5ut",
       "FolderName": "pranit",
       "userId": "1d9HZRJQp3ykiXxQZltce"
     }
   ],
   "task": [
     {
-      "id": "Hy-tUsbFnZSvnv3517dbb",
-      "TaskTitle": "reel 1 script",
-      "folderId": "uu3DV5GNf2h3VeCI7ctNv"
-    },
-    {
-      "id": "ws0_Y5p7zhElG9ow6Q-Im",
-      "TaskTitle": "pranit ",
-      "folderId": "uu3DV5GNf2h3VeCI7ctNv"
-    },
-    {
-      "id": "srU95ZVJNL6ITl0ATf2XH",
-      "TaskTitle": "reel 2",
-      "folderId": "phr3u-Td5BG0XOcgPGTWg"
-    },
-    {
-      "id": "0AyeBj02aqmkT0lTa0OwK",
-      "TaskTitle": "dfsfdsffssfd",
-      "folderId": "z_bzFiHd6DIcHaOt51peb"
-    },
-    {
-      "id": "jaKFM_U_jFV4f7i47oh-f",
-      "TaskTitle": "test task",
-      "folderId": "uu3DV5GNf2h3VeCI7ctNv",
-      "userId": "1d9HZRJQp3ykiXxQZltce"
-    },
-    {
-      "id": "OF6D9GdEEjtEwpXSYYGrg",
-      "TaskTitle": "test task",
-      "folderId": "ITxkzzH0tuFBJG4zYxAPs",
-      "userId": "1d9HZRJQp3ykiXxQZltce"
-    },
-    {
-      "id": "Wzt3P1gVt3O9HZYVIgSm7",
-      "TaskTitle": "new task",
-      "folderId": "ITxkzzH0tuFBJG4zYxAPs",
-      "userId": "1d9HZRJQp3ykiXxQZltce"
-    },
-    {
-      "id": "k9WcqFRg1B5AOuFcaJ7We",
-      "TaskTitle": "dgdfgdfdf",
-      "folderId": "ITxkzzH0tuFBJG4zYxAPs",
-      "userId": "1d9HZRJQp3ykiXxQZltce"
-    },
-    {
-      "id": "dyj-eyvcLIbyUnk7Hso2I",
-      "TaskTitle": "test task",
-      "folderId": "sqLntmAxcuzSwqr0EBth5",
-      "userId": "1d9HZRJQp3ykiXxQZltce"
+      "id": "_eIBS85c0B-ZWbsKd1wTU",
+      "TaskTitle": "layout design",
+      "folderId": null,
+      "userId": "67K1ocelCE7Cs5WGE7zg3"
     }
   ],
   "todos": [
     {
-      "id": "Pn_U4lOLGln-fAWOI6Yt_",
-      "title": "ggdfgdasdasd",
-      "description": "dffgdffgdfg",
-      "folderId": "phr3u-Td5BG0XOcgPGTWg",
-      "taskId": "srU95ZVJNL6ITl0ATf2XH",
-      "createdAt": 1750677200475
-    },
-    {
-      "id": "70NugodiMMN9RaCRBYXiy",
-      "title": "hello pranitt",
-      "description": "hello hello my name is pranit i am currently a student",
-      "folderId": "uu3DV5GNf2h3VeCI7ctNv",
-      "taskId": "ws0_Y5p7zhElG9ow6Q-Im",
-      "createdAt": 1750684777082
-    },
-    {
-      "id": "PoPL8LFjYU0cWLQOn60c-",
-      "title": "fsffsdfsdf",
-      "description": "sfdsff",
-      "folderId": "uu3DV5GNf2h3VeCI7ctNv",
-      "taskId": "Hy-tUsbFnZSvnv3517dbb",
-      "createdAt": 1750835013128
-    },
-    {
-      "id": "mBeK-32k_i1Lmd_Wg8iMb",
-      "title": "testing todo",
-      "description": "testing todo",
-      "folderId": "uu3DV5GNf2h3VeCI7ctNv",
-      "taskId": "Hy-tUsbFnZSvnv3517dbb",
-      "createdAt": 1750853905721
-    },
-    {
-      "id": "53_QVAbYTYtJ7YTRJC4Iq",
-      "title": "new testing todo",
-      "description": "new testing todo",
-      "folderId": "uu3DV5GNf2h3VeCI7ctNv",
-      "taskId": "Hy-tUsbFnZSvnv3517dbb",
-      "createdAt": 1750853956944
-    },
-    {
-      "id": "yVqQ5dm1TnRqLdIkDYFMg",
-      "title": "new new testing todo",
-      "description": "new new testing todo",
-      "folderId": "uu3DV5GNf2h3VeCI7ctNv",
-      "taskId": "Hy-tUsbFnZSvnv3517dbb",
-      "createdAt": 1750853989793
-    },
-    {
-      "id": "6sqd0uXtsPUHYkKqTw0X_",
-      "title": "dfbbvb",
-      "description": "bcbcvbcb",
-      "folderId": "uu3DV5GNf2h3VeCI7ctNv",
-      "taskId": "Hy-tUsbFnZSvnv3517dbb",
-      "createdAt": 1750854025984
-    },
-    {
-      "id": "8FWLjAykoRSGn4uiewlWp",
-      "title": "final testing todo",
-      "description": "final testing todo",
-      "folderId": "uu3DV5GNf2h3VeCI7ctNv",
-      "taskId": "Hy-tUsbFnZSvnv3517dbb",
+      "id": "enOpycgO3jXrU54wI0ALT",
+      "title": "Pranit jitendra daphale",
+      "description": "hello sir my name is pranit and i am building the task tree",
+      "folderId": "ll6-d0t2rTvm7r4QPe5ut",
+      "taskId": null,
       "userId": "1d9HZRJQp3ykiXxQZltce",
-      "createdAt": 1750854431663
+      "createdAt": 1750872984102
     }
   ]
 }

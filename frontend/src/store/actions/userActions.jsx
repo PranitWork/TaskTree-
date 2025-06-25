@@ -1,7 +1,6 @@
 import { loadusers, logoutuser } from "../reducers/userSlice";
 import axios from "../../api/config"
 
-
 export const asyncCurrentUser = () => async (dispatch, getState) => {
     try{
         const user = JSON.parse(localStorage.getItem("users"));
@@ -17,6 +16,7 @@ export const asyncCreateUser=(data)=> async (dispatch, getState)=>{
     try{
         const user = await axios.post("/users", data);
         dispatch(asyncCurrentUser);
+
     }catch(err){
         console.log(err)
     }
@@ -33,6 +33,7 @@ export const asyncsigninuser = (users) => async (dispatch, getState) => {
             console.log("User logged in!");
             localStorage.setItem("users", JSON.stringify(data[0]));
             dispatch(asyncCurrentUser());
+
         } else {
             alert("Wrong Credientials!");
         }

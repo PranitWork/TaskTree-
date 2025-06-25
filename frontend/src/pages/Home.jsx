@@ -62,7 +62,6 @@ const Home = () => {
     dispatch(asyncTodoCreate(data));
     closeModal();
   };
-  console.log(taskTitle);
   return (
     <div className="relative w-full">
       <div className="p-5 w-full relative inline-block">
