@@ -5,16 +5,20 @@ import { useForm } from 'react-hook-form';
 import { nanoid } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { asyncCreateUser } from '../store/actions/userActions';
+import { asyncloadFolders } from '../store/actions/folderActions';
+import { asyncLoadTask } from '../store/actions/TaskActions';
 const Register = () => {
   const dispatch = useDispatch()
   const {register, handleSubmit,reset}= useForm()
       const [showPassword, setShowPassword] = useState(false);
   const togglePassword = () => setShowPassword((prev) => !prev);
   const navigate = useNavigate();
-  const registerHandler =(data)=>{
+  const registerHandler =async (data)=>{
     data.id= nanoid();
     localStorage.setItem("users", JSON.stringify(data));
     dispatch(asyncCreateUser(data))
+      await dispatch(asyncloadFolders())
+        await dispatch(asyncLoadTask())
     navigate("/")
     reset()
   }

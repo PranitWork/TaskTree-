@@ -4,6 +4,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { asyncsigninuser } from "../store/actions/userActions";
+import { asyncloadFolders } from "../store/actions/folderActions";
+import { asyncLoadTask } from "../store/actions/TaskActions";
 
 
 
@@ -14,9 +16,11 @@ const Login = () => {
   const togglePassword = () => setShowPassword((prev) => !prev);
   const dispatch = useDispatch();
 
-  const loginHandler =(data)=>{
+  const loginHandler = async (data)=>{
     dispatch(asyncsigninuser(data));
   
+    await dispatch(asyncloadFolders())
+    await dispatch(asyncLoadTask())
     reset()
     setTimeout(() => {
       navigate("/")

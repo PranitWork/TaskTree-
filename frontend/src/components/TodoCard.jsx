@@ -35,7 +35,7 @@ const TodoCard = () => {
           </div>
         ))
       ) : (
-        <h1>No Todo Found...</h1>
+        <h1>No Task Found...</h1>
       )}
     </>
   );

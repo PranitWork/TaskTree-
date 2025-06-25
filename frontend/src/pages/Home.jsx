@@ -35,7 +35,13 @@ const Home = () => {
     setUserTasks(filteredTasks);
   }, [folders, Tasks]);
 
-  const taskTitle = String(selectedname.name);
+  // ✅ Safe access to task title
+  const taskTitle = selectedname?.name || "";
+
+  // ✅ Condition to show fallback text
+  const showDefaultText =
+    !taskTitle || userTasks.length === 0 || userFolders.length === 0;
+
   const {
     register,
     handleSubmit,
@@ -46,7 +52,7 @@ const Home = () => {
     defaultValues: { title: "", description: "" },
   });
 
-  const selectedFolderId = watch("folderId"); // 👈 watch the folder selection
+  const selectedFolderId = watch("folderId");
   const dispatch = useDispatch();
 
   const openModal = () => setIsModalOpen(true);
@@ -62,13 +68,14 @@ const Home = () => {
     dispatch(asyncTodoCreate(data));
     closeModal();
   };
+
   return (
     <div className="relative w-full">
       <div className="p-5 w-full relative inline-block">
         <h1 className="text-[4vh] mb-5 font-bold">
-          {taskTitle || "Start writing your tasks..."}
+          {showDefaultText ? "Start writing your tasks..." : taskTitle}
         </h1>
-        <div className=" w-full flex gap-3">
+        <div className="w-full flex gap-3">
           <TodoCard />
         </div>
       </div>
@@ -122,6 +129,11 @@ const Home = () => {
                 })}
                 className="rounded-2xl bg-gray-100 p-3 resize-none outline-none"
               />
+              {errors.description && (
+                <p className="text-red-500 text-sm">
+                  {errors.description.message}
+                </p>
+              )}
 
               <select
                 {...register("folderId", {
@@ -146,7 +158,8 @@ const Home = () => {
                 <option value="">-- Select Task --</option>
                 {userTasks
                   .filter(
-                    (task) => String(task.folderId) === String(selectedFolderId)
+                    (task) =>
+                      String(task.folderId) === String(selectedFolderId)
                   )
                   .map((Task) => (
                     <option key={Task.id} value={Task.id}>
@@ -154,12 +167,6 @@ const Home = () => {
                     </option>
                   ))}
               </select>
-
-              {errors.description && (
-                <p className="text-red-500 text-sm">
-                  {errors.description.message}
-                </p>
-              )}
 
               <button
                 type="submit"
