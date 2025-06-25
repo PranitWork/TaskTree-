@@ -13,9 +13,12 @@ const todoSlicer = createSlice({
     loadusers : (state, action)=>{
       state.users = action.payload;
     },
+    logoutuser: (state,action)=>{
+      state.users =null;
+    },
   },
 });
 
 export default todoSlicer.reducer;
 
-export const {loadusers}= todoSlicer.actions;
+export const {loadusers, logoutuser}= todoSlicer.actions;

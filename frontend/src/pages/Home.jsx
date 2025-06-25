@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TodoCard from "../components/TodoCard";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,7 +10,31 @@ const Home = () => {
   const folders = useSelector((state) => state.folderReducer.folders);
   const Tasks = useSelector((state) => state.taskReducer.tasks);
   const selectedname = useSelector((state) => state.selectedTaskReducer.name);
-  
+  const userDetails = JSON.parse(localStorage.getItem("users"));
+
+  const [userFolders, setUserFolders] = useState([]);
+  const [userTasks, setUserTasks] = useState([]);
+
+  useEffect(() => {
+    if (!userDetails || !userDetails.id) {
+      console.warn("User not found in localStorage");
+      return;
+    }
+
+    const filteredFolders = folders.filter(
+      (folder) => folder && folder.userId === userDetails.id
+    );
+
+    const folderIds = filteredFolders.map((f) => f.id);
+
+    const filteredTasks = Tasks.filter((task) =>
+      folderIds.includes(task.folderId)
+    );
+
+    setUserFolders(filteredFolders);
+    setUserTasks(filteredTasks);
+  }, [folders, Tasks]);
+
   const taskTitle = String(selectedname.name);
   const {
     register,
@@ -22,7 +46,6 @@ const Home = () => {
     defaultValues: { title: "", description: "" },
   });
 
-
   const selectedFolderId = watch("folderId"); // 👈 watch the folder selection
   const dispatch = useDispatch();
 
@@ -33,15 +56,19 @@ const Home = () => {
   };
 
   const onSubmit = (data) => {
-    const todo = { ...data, id: nanoid(), createdAt: Date.now() };
-    dispatch(asyncTodoCreate(todo));
+    data.id = nanoid();
+    data.userId = userDetails.id;
+    data.createdAt = Date.now();
+    dispatch(asyncTodoCreate(data));
     closeModal();
   };
-
+  console.log(taskTitle);
   return (
     <div className="relative w-full">
       <div className="p-5 w-full relative inline-block">
-        <h1 className="text-[4vh] mb-5 font-bold">{taskTitle}</h1>
+        <h1 className="text-[4vh] mb-5 font-bold">
+          {taskTitle || "Start writing your tasks..."}
+        </h1>
         <div className=" w-full flex gap-3">
           <TodoCard />
         </div>
@@ -104,7 +131,7 @@ const Home = () => {
                 className="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
               >
                 <option value="">-- Select Folder --</option>
-                {folders.map((folder) => (
+                {userFolders.map((folder) => (
                   <option key={folder.id} value={folder.id}>
                     {folder.FolderName || "Untitled Folder"}
                   </option>
@@ -118,13 +145,15 @@ const Home = () => {
                 className="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
               >
                 <option value="">-- Select Task --</option>
-                {Tasks.filter(
-                  (task) => String(task.folderId) === String(selectedFolderId)
-                ).map((Task) => (
-                  <option key={Task.id} value={Task.id}>
-                    {Task.TaskTitle || "Untitled Task"}
-                  </option>
-                ))}
+                {userTasks
+                  .filter(
+                    (task) => String(task.folderId) === String(selectedFolderId)
+                  )
+                  .map((Task) => (
+                    <option key={Task.id} value={Task.id}>
+                      {Task.TaskTitle || "Untitled Task"}
+                    </option>
+                  ))}
               </select>
 
               {errors.description && (

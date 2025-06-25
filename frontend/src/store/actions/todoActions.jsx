@@ -13,11 +13,11 @@ export const asyncLoadTodo = () => async (dispatch, getState) => {
   }
 };
 
-export const asyncTodoCreate= (id,todo)=> async (dispatch,getState)=>{
+export const asyncTodoCreate= (todo)=> async (dispatch,getState)=>{
     try{
         await axios.post("/todos",todo);
         dispatch(asyncLoadTodo());
-
+      console.log("created todo")
     }catch(err){
         console.log(err);
         

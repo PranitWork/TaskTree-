@@ -42,7 +42,7 @@ const TodoDetails = () => {
     <div className="w-[80%] shadow-lg relative m-auto h-[90vh] p-5 rounded-3xl bg-[#F0F0F0]">
       <form onSubmit={handleSubmit(submitHandler)}>
         <input
-          className="w-full outline-0"
+          className="w-full font-medium text-2xl outline-0"
           type="text"
           placeholder="Enter Todo Title..."
           readOnly={!isEditable}
@@ -51,7 +51,7 @@ const TodoDetails = () => {
         <hr className="my-4" />
         <textarea
           className="w-full outline-0 resize-none"
-          rows="17"
+          rows="19"
           placeholder="Enter Todo"
           readOnly={!isEditable}
           {...register("description")}
