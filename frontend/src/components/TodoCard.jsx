@@ -10,33 +10,34 @@ const TodoCard = () => {
       : [];
   return (
     <>
-      {filteredTodos.length ? (
-        filteredTodos.map((t) => (
-          <div key={t.id} className="mb-4 w-[25%] cursor-pointer">
-            <div className="relative w-full bg-[#F0F0F0] p-3 rounded-t-2xl h-[200px]">
-              <h1 className="text-[2.5vh] w-full font-semibold">{t.title}</h1>
-              <hr className="my-3 text-gray-300" />
-              <div className="w-full overflow-y-auto">
-                <p className="text-gray-700 text-[2vh] ">
-                  {t.description.slice(0, 100) + "..."}
+     {filteredTodos.length ? (
+          filteredTodos.map((t) => (
+            <div
+              key={t.id}
+              className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 bg-white rounded-2xl shadow hover:shadow-md transition overflow-hidden"
+            >
+              <div className="bg-[#F0F0F0] p-4 h-[200px] relative">
+                <h2 className="text-lg font-semibold text-gray-800 truncate">
+                  {t.title}
+                </h2>
+                <hr className="my-3 border-gray-300" />
+                <p className="text-sm text-gray-700 max-h-[90px] overflow-y-auto">
+                  {t.description.slice(0, 100)}...
+                </p>
+                <p className="absolute bottom-2 text-xs text-gray-500">
+                  Created: {new Date(t.createdAt).toLocaleString()}
                 </p>
               </div>
-              <p className="text-[2vh] text-gray-500 absolute bottom-0">
-                Created: {new Date(t.createdAt).toLocaleString()}
-              </p>
+              <div className="bg-[#d2fe94] p-3 text-center">
+                <NavLink to={`/details/${t.id}`} className="text-sm font-medium text-black">
+                  Detail
+                </NavLink>
+              </div>
             </div>
-            <div className="rounded-b-2xl w-full bg-[#d2fe94] p-3 flex justify-center">
-          <NavLink to={`/details/${t.id}`}>
-              <button className="font-medium cursor-pointer text-black">
-                Detail
-              </button>
-      </NavLink>
-            </div>
-          </div>
-        ))
-      ) : (
-        <h1>No Task Found...</h1>
-      )}
+          ))
+        ) : (
+          <p className="text-center text-gray-500 w-full">No Task Found...</p>
+        )}
     </>
   );
 };

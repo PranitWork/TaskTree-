@@ -15,34 +15,18 @@
   ],
   "folders": [
     {
-      "id": "ll6-d0t2rTvm7r4QPe5ut",
+      "id": "Y8ri-scnd4VieBzJ2qweB",
       "FolderName": "pranit",
       "userId": "1d9HZRJQp3ykiXxQZltce"
     }
   ],
   "task": [
     {
-      "id": "_eIBS85c0B-ZWbsKd1wTU",
-      "TaskTitle": "layout design",
-      "folderId": null,
-      "userId": "67K1ocelCE7Cs5WGE7zg3"
-    },
-    {
-      "id": "m9wwp6zoxXbCPUb9vML4f",
-      "TaskTitle": "test task",
-      "folderId": "ll6-d0t2rTvm7r4QPe5ut",
+      "id": "nfx1nFOw3wmrnRHBqygin",
+      "TaskTitle": "new task",
+      "folderId": "Y8ri-scnd4VieBzJ2qweB",
       "userId": "1d9HZRJQp3ykiXxQZltce"
     }
   ],
-  "todos": [
-    {
-      "id": "enOpycgO3jXrU54wI0ALT",
-      "title": "Pranit jitendra daphale",
-      "description": "hello sir my name is pranit and i am building the task tree",
-      "folderId": "ll6-d0t2rTvm7r4QPe5ut",
-      "taskId": null,
-      "userId": "1d9HZRJQp3ykiXxQZltce",
-      "createdAt": 1750872984102
-    }
-  ]
+  "todos": []
 }

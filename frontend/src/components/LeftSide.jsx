@@ -8,10 +8,11 @@ import {
   asyncdeleteFolder,
   asyncloadFolders,
 } from "../store/actions/folderActions";
-import { asyncdeleteTask, asyncTaskCreate } from "../store/actions/TaskActions";
+import { asyncdeleteTask, asyncLoadTask, asyncTaskCreate } from "../store/actions/TaskActions";
 import { setSelectedTaskId } from "../store/reducers/selectedTaskSlice";
 import { ayncsignoutuser } from "../store/actions/userActions";
 import { selectedFolderId } from "../store/reducers/selectedFolderSlice";
+import { asyncDeleteTodo, asyncLoadTodo } from "../store/actions/todoActions";
 
 const LeftSide = () => {
   const folderForm = useForm();
@@ -26,67 +27,38 @@ const LeftSide = () => {
 
   const folders = useSelector((state) => state.folderReducer.folders);
   const Tasks = useSelector((state) => state.taskReducer.tasks);
+  const todos = useSelector((state) => state.todoReducer.todos);
 
   const selectedFolder = useSelector((state) => state.selectedFolderReducer.id);
-  const deletefolder=()=>{
-    dispatch(asyncdeleteFolder(selectedFolder));
-  }
+  const selectedTask = useSelector((state) => state.selectedTaskReducer);
 
- const selectedTask = useSelector((state) => state.selectedTaskReducer);
-
- const deleteTask = () => {
-   dispatch(asyncdeleteTask(selectedTask.id.id));
-    
-};
-
+  const [userFolders, setUserFolders] = useState([]);
+  const [userTasks, setUserTasks] = useState([]);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const userAuth = JSON.parse(localStorage.getItem("users"));
   const userDetails = JSON.parse(localStorage.getItem("users"));
 
-  const [userFolders, setUserFolders] = useState([]);
-  const [userTasks, setUserTasks] = useState([]);
+ 
 
-  useEffect(() => {
-    if (!userDetails || !userDetails.id) {
-      console.warn("User not found in localStorage");
-      return;
-    }
+  const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
-    const filteredFolders = folders.filter(
-      (folder) => folder && folder.userId === userDetails.id
-    );
-
-    const folderIds = filteredFolders.map((f) => f.id);
-
-    const filteredTasks = Tasks.filter((task) =>
-      folderIds.includes(task.folderId)
-    );
-
-    setUserFolders(filteredFolders);
-    setUserTasks(filteredTasks);
-  }, [folders, Tasks]);
+  const closeSidebar = () => {
+    if (window.innerWidth < 640) setIsSidebarOpen(false);
+  };
 
   const folderOpenClose = (id) => {
     if (userAuth) {
-      if (activeFolderId === id) {
-        setToggletFolder((prev) => !prev);
-      } else {
+      if (activeFolderId === id) setToggletFolder((prev) => !prev);
+      else {
         setActiveFolderId(id);
         setToggletFolder(true);
       }
-    } else {
-      navigate("/login");
-    }
+    } else navigate("/login");
   };
 
-  const openCreateFolder = () => {
-    if (userAuth) {
-      setShowCreateFolder(true);
-    } else {
-      navigate("/login");
-    }
-  };
-
+  const openCreateFolder = () =>
+    userAuth ? setShowCreateFolder(true) : navigate("/login");
   const openAddTask = () => {
     if (userAuth) {
       setShowAddTask(true);
@@ -108,9 +80,7 @@ const LeftSide = () => {
       data.id = nanoid();
       dispatch(asynccreateFolder(data));
       closeModal();
-    } else {
-      navigate("/login");
-    }
+    } else navigate("/login");
   };
 
   const saveTaskHandler = (data) => {
@@ -119,33 +89,112 @@ const LeftSide = () => {
       data.userId = userDetails.id;
       dispatch(asyncTaskCreate(data));
       closeModal();
-    } else {
-      navigate("/login");
+    } else navigate("/login");
+  };
+
+ const deletefolder = async () => {
+  // 1. Get all tasks under the selected folder
+  const taskFilterDelete = Tasks.filter(task => task.folderId === selectedFolder);
+
+  // 2. For each task, delete its todos
+  for (const task of taskFilterDelete) {
+    const relatedTodos = todos.filter(todo => todo.taskId === task.id);
+    for (const todo of relatedTodos) {
+      await dispatch(asyncDeleteTodo(todo.id));
     }
-  };
-  const backtrack = () => {
-    navigate("/");
-  };
+
+    await dispatch(asyncdeleteTask(task.id)); // delete the task
+      dispatch(asyncloadFolders());
+  dispatch(asyncLoadTask());
+  dispatch(asyncLoadTodo());
+  }
+
+  // 3. Finally, delete the folder
+  await dispatch(asyncdeleteFolder(selectedFolder));
+};
+const deleteTask = async () => {
+  const taskId = selectedTask.id.id;
+
+  const relatedTodos = todos.filter(todo => todo.taskId === taskId);
+
+  for (const todo of relatedTodos) {
+    await dispatch(asyncDeleteTodo(todo.id));
+  }
+
+  await dispatch(asyncdeleteTask(taskId));
+        dispatch(asyncloadFolders());
+  dispatch(asyncLoadTask());
+  dispatch(asyncLoadTodo());
+};
+
+
+  const backtrack = () => navigate("/");
 
   const logout = () => {
     dispatch(ayncsignoutuser());
     navigate("/register");
+          dispatch(asyncloadFolders());
+  dispatch(asyncLoadTask());
+  dispatch(asyncLoadTodo());
   };
+
+
+
+   useEffect(() => {
+    if (!userDetails || !userDetails.id) return;
+
+    const filteredFolders = folders.filter(
+      (folder) => folder && folder.userId === userDetails.id
+    );
+    const folderIds = filteredFolders.map((f) => f.id);
+    const filteredTasks = Tasks.filter((task) =>
+      folderIds.includes(task.folderId)
+    );
+
+    setUserFolders(filteredFolders);
+    setUserTasks(filteredTasks);
+
+  }, [folders, Tasks]);
 
   return (
     <>
+      {/* Toggle Button */}
+      <button
+        onClick={toggleSidebar}
+        className={`sm:hidden fixed top-4 z-30 bg-white p-2 rounded-full shadow-lg transition-all duration-300 ${
+          isSidebarOpen ? "right-4" : "left-4"
+        }`}
+      >
+        <i
+          className={`ri-menu-line text-2xl transition-transform duration-300 ${
+            isSidebarOpen ? "rotate-90" : ""
+          }`}
+        ></i>
+      </button>
+
+      {/* Overlay */}
+      {isSidebarOpen && (
+        <div
+          onClick={toggleSidebar}
+          className="sm:hidden fixed inset-0 bg-black/30 z-10"
+        ></div>
+      )}
+
       {/* Sidebar */}
-      <div className="relative flex flex-col w-[17%] min-h-screen bg-gradient-to-b from-[#f3f4f6] to-[#e5e7eb] shadow-xl rounded-se-3xl">
-        {/* Folders Section */}
+      <div
+        className={`fixed sm:relative z-20 transition-transform duration-300 ${
+          isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } w-[80%] sm:w-[60%] md:w-[40%] lg:w-[25%] xl:w-[17%] min-h-screen bg-gradient-to-b from-[#f3f4f6] to-[#e5e7eb] shadow-xl rounded-se-3xl`}
+      >
         <div className="flex-1 p-4 overflow-y-auto space-y-4">
-          <h1 className="text-3xl font-bold text-gray-700 mb-3">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-700 mb-3">
             Task <span className="text-green-600">Tree</span>
           </h1>
-          <h2 className="text-[2.5vh] font-semibold text-gray-500 mb-3">
+          <h2 className="text-lg sm:text-[2.5vh] font-semibold text-gray-500 mb-3">
             Folders
           </h2>
 
-          <div className="bg-white h-[60vh] overflow-y-scroll rounded-xl p-3 shadow hover:shadow-md transition">
+          <div className="bg-white max-h-[60vh] overflow-y-auto rounded-xl p-3 shadow hover:shadow-md transition">
             {userFolders.map((f) => (
               <div
                 key={f.id}
@@ -153,22 +202,19 @@ const LeftSide = () => {
                 className="mb-3"
               >
                 <div className="flex items-center justify-between px-2 py-1 rounded-md hover:bg-gray-100 transition group">
-                  {/* Left: Folder Icon and Name */}
                   <div className="flex items-center gap-2 overflow-hidden">
                     <i className="ri-folder-5-line text-yellow-500 text-xl"></i>
                     <h3 className="text-base font-medium text-gray-700 truncate max-w-[140px]">
                       {f.FolderName}
                     </h3>
                   </div>
-
-                  {/* Right: Delete Icon (Recycle Bin) */}
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
                       dispatch(selectedFolderId(f.id));
-                      deletefolder()
+                      deletefolder();
                     }}
-                    className="text-gray-400 hover:text-red-600 opacity-0 group-hover:opacity-100 transition"
+                    className="text-gray-400 sm:opacity-0 sm:group-hover:opacity-100 opacity-100 hover:text-red-600 transition"
                     title="Delete Folder"
                   >
                     <i className="ri-delete-bin-line text-lg"></i>
@@ -188,16 +234,15 @@ const LeftSide = () => {
                             dispatch(
                               setSelectedTaskId({ id: t.id, name: t.TaskTitle })
                             );
-                           
                             backtrack();
+                            closeSidebar();
                           }}
                         >
                           <p className="text-sm text-gray-800 font-medium truncate max-w-[85%]">
                             {t.TaskTitle}
                           </p>
-
                           <button
-                            className="absolute right-3 text-red-500 hover:text-red-700 opacity-0 group-hover:opacity-100 transition"
+                            className="absolute right-3 text-gray-400 hover:text-red-700 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition"
                             onClick={(e) => {
                               e.stopPropagation();
                               dispatch(
@@ -206,7 +251,7 @@ const LeftSide = () => {
                                   name: t.TaskTitle,
                                 })
                               );
-                               deleteTask();
+                              deleteTask();
                             }}
                           >
                             <i className="ri-delete-bin-line text-lg"></i>
@@ -220,18 +265,21 @@ const LeftSide = () => {
           </div>
         </div>
 
-        {/* Buttons */}
-        <div className="p-4 bg-white shadow-inner rounded-ee-3xl space-y-3">
-          <div className="w-full flex gap-5">
+        {/* Action Buttons */}
+        <div className="p-4 bg-white shadow-inner space-y-3">
+          <div className="w-full flex flex-col sm:flex-row gap-3 sm:gap-5">
             <button
-              onClick={logout}
-              className="w-full text-center cursor-pointer text-[13px] py-1 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium transition shadow"
+              onClick={() => {
+  logout();
+  closeSidebar();
+}}
+              className="w-full text-center text-[13px] py-1 bg-red-500 hover:bg-red-600 text-white rounded-xl font-medium transition shadow"
             >
               <i className="ri-login-box-line"></i>
             </button>
             <NavLink
               to="/register"
-              className="w-full text-center cursor-pointer text-[13px] py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-medium transition shadow"
+              className="w-full text-center text-[13px] py-1 bg-blue-500 hover:bg-blue-600 text-white rounded-xl font-medium transition shadow"
             >
               <i className="ri-user-fill"></i>
             </NavLink>
@@ -251,7 +299,7 @@ const LeftSide = () => {
         </div>
       </div>
 
-      {/* Folder Modal */}
+      {/* Create Folder Modal */}
       {showCreateFolder && (
         <div
           onClick={closeModal}
@@ -298,7 +346,7 @@ const LeftSide = () => {
         </div>
       )}
 
-      {/* Task Modal */}
+      {/* Add Task Modal */}
       {showAddTask && (
         <div
           onClick={closeModal}
