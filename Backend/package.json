@@ -1,23 +1,16 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "name": "John Doe"
-    }
-  ],
-  "folders": [
-    {
-      "id": 1,
-      "userId": 1,
-      "folderName": "Work"
-    }
-  ],
-  "todos": [
-    {
-      "id": 1,
-      "folderId": 1,
-      "todoTitle": "Read Content",
-      "todoDescription": "Read and summarize the content"
-    }
-  ]
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "json-server": "^1.0.0-beta.3"
+  }
 }

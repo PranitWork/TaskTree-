@@ -1,36 +1,14 @@
 {
   "users": [
-    {
-      "id": "1d9HZRJQp3ykiXxQZltce",
-      "fullname": "pranit",
-      "email": "pranit@gmail.com",
-      "password": "123"
-    },
-    {
-      "id": "67K1ocelCE7Cs5WGE7zg3",
-      "fullname": "gauri",
-      "email": "gauri@gmail.com",
-      "password": "123"
-    }
+    
   ],
   "folders": [
-    {
-      "id": "Y8ri-scnd4VieBzJ2qweB",
-      "FolderName": "pranit",
-      "userId": "1d9HZRJQp3ykiXxQZltce"
-    },
-    {
-      "id": "fqHR3BmXC3cy9URROhPv8",
-      "FolderName": "pranit"
-    }
+
   ],
   "task": [
-    {
-      "id": "nfx1nFOw3wmrnRHBqygin",
-      "TaskTitle": "new task",
-      "folderId": "Y8ri-scnd4VieBzJ2qweB",
-      "userId": "1d9HZRJQp3ykiXxQZltce"
-    }
+   
   ],
-  "todos": []
+  "todos": [
+   
+  ]
 }
